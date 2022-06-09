@@ -1,10 +1,9 @@
 var trex, trex_running, trex_collided;
 var ground, invisibleGround, groundImage;
+var cloud,cloudImage;
 
 function preload(){
-  trex_running = loadAnimation("trex1.png","trex2.png","trex3.png");
-  trex_collided = loadImage("trex_collided.png");
-  
+  trex_running = loadAnimation("trex1.png","trex2.png","trex3.png"); 
   groundImage = loadImage("ground2.png");
    
 }
@@ -28,22 +27,28 @@ function setup() {
   invisibleGround = createSprite(200,190,400,10);
   invisibleGround.visible = false;
 
-  var r=Math.round(random(1,10));
-  console.log(r)
+
+
  
 }
 
+
 function draw() {
   //set background color
-  background(220);
+  background("pink");
 
-  console.log(frameCount)
+  //var a=Math.round(random(1,100))
+ // console.log(a)
+ console.log(frameCount)
+  
+
   
   // jump when the space key is pressed
-  if(keyDown("space")&& trex.y >= 100) {
+  if(keyDown("space")&& trex.y >= 150) {
     trex.velocityY = -10;
   }
   
+  //adding gravity
   trex.velocityY = trex.velocityY + 0.8
   
   if (ground.x < 0){
@@ -53,18 +58,23 @@ function draw() {
   //stop trex from falling down
   trex.collide(invisibleGround);
 
-  spawnCloud();
+  //calling SpawnClouds Function
+  spawnClouds();
+  
   drawSprites();
   
 }
 
-function spawnCloud(){
-
-  if(frameCount%60===0){
-      cloud=createSprite(600,100,40,10);
-      cloud.y=Math.round(random(10,60));
-      cloud.velocityX=-4;
+//Creating / Defining a function
+//Calling a function
+function spawnClouds(){
+ 
+  //only in the multiples of 60
+  if(frameCount%60===0){ 
+    var cloud=createSprite(600,100,40,10);
+    cloud.velocityX=-4;
   }
+
 
 }
 
